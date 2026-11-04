@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- 告诉浏览器：这是中文网页，手机上也能正常显示 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的第一个网页 — 编程学习第 1 天</title>
+
+  <!-- CSS 样式都写在这里（皮肤：控制网页长什么样） -->
+  <style>
+    /* CSS 变量：改这两个颜色，全站跟着变，先玩这个 */
+    :root {
+      --主色: #16a34a;        /* 蓝色主题，改成 red 试试 */
+      --背景色: #f5f7fa;
+      --卡片色: #ffffff;
+      --文字色: #1f2937;
+    }
+    /* 暗黑模式：点击按钮后 body 加上 dark 类，颜色全部切换 */
+    body.dark {
+      --背景色: #111827;
+      --卡片色: #1f2937;
+      --文字色: #e5e7eb;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      background: var(--背景色);
+      color: var(--文字色);
+      transition: background 0.3s, color 0.3s;  /* 颜色切换时有淡入效果 */
+    }
+
+    /* ===== 顶部导航栏 ===== */
+    header {
+      background: var(--卡片色);
+      display: flex;
+      justify-content: space-between;   /* 左右两端对齐 */
+      align-items: center;
+      padding: 14px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      position: sticky; top: 0;         /* 往下滚动时导航栏固定在顶部 */
+    }
+    header .logo { font-weight: bold; color: var(--主色); font-size: 18px; }
+    header button {
+      border: 1px solid var(--主色);
+      background: transparent;
+      color: var(--主色);
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;                  /* 鼠标放上去变小手 */
+    }
+    header button:hover { background: var(--主色); color: #fff; }
+
+    /* ===== 主标题区 ===== */
+    .hero { text-align: center; padding: 60px 20px 30px; }
+    .hero h1 { font-size: 32px; margin-bottom: 12px; }
+    .hero p  { color: #6b7280; font-size: 16px; }
+
+    /* ===== 卡片区 ===== */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 手机上自动变一列 */
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .card {
+      background: var(--卡片色);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); }   /* 鼠标放上去轻轻上浮 */
+    .card .icon  { font-size: 34px; }
+    .card h3     { margin: 10px 0 6px; }
+    .card p      { font-size: 14px; color: #6b7280; line-height: 1.6; }
+
+    footer { text-align: center; padding: 30px; font-size: 13px; color: #9ca3af; }
+  </style>
+</head>
+
+<body>
+  <!-- HTML 结构（骨架：网页里有什么内容） -->
+
+  <!-- 导航栏 -->
+  <header>
+    <div class="logo">🧑‍💻 老张的中央空调系统节能之家</div>
+    <button id="darkBtn">🌙 暗黑模式</button>
+  </header>
+
+  <!-- 主标题 + 介绍 -->
+  <section class="hero">
+    <h1>你好，这是我的第一个网页！</h1>
+    <p>用 AI 写代码 + 自己动手改，编程学习第 1 天的成果。</p>
+  </section>
+
+  <!-- 四张卡片：想改文字，直接改下面 <h3> 和 <p> 里的中文 -->
+  <section class="cards">
+    <div class="card">
+      <div class="icon">🌐</div>
+      <h3>节能改造测算</h3>
+      <p>换泵、加变频、改管路，算清楚能省多少电费。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔧</div>
+      <h3>空调维保巡检</h3>
+      <p>按机组编号记录巡检日期、压力、温度，异常自动标红。</p>
+    </div>
+    <div class="card">
+      <div class="icon">📋</div>
+      <h3>设备台账</h3>
+      <p>每台机组的型号、安装日期、维修记录，一页看清楚。</p>
+    </div>
+    <div class="card">
+      <div class="icon">❄️</div>
+      <h3>故障处理流程</h3>
+      <p>从报修到验收的每一步，谁签字、谁负责，不再扯皮。</p>
+    </div>
+  <div class="card">
+      <div class="icon">⚡</div>
+      <h3>报价单生成</h3>
+      <p>按项目把机组型号、数量、单价拉出来，自动合计金额，直接出单。</p>
+    </div>
+  </section>
+
+  <footer>© 2026 我的编程学习 · 用记事本就能打开本文件查看源代码</footer>
+
+  <!-- JavaScript（大脑：网页怎么动） -->
+  <script>
+    // 找到按钮，点击时切换暗黑模式
+    const btn = document.getElementById('darkBtn');
+    btn.addEventListener('click', function () {
+      document.body.classList.toggle('dark');
+      // 顺便换按钮上的文字
+      if (document.body.classList.contains('dark')) {
+        btn.textContent = '☀️ 明亮模式';
+      } else {
+        btn.textContent = '🌙 暗黑模式';
+      }
+    });
+  </script>
+</body>
+</html>
