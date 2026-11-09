@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>故障处理流程 · 责任到人</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="logo">🧊 老张的中央空调系统节能之家</div>
+  <nav class="nav">
+    <a href="index.html">🏠 首页</a>
+    <a href="hvac-plan.html">📖 维保方案</a>
+    <a href="maglev.html">🌀 磁悬浮专篇</a>
+    <a href="zhidu.html">📋 制度上墙</a>
+    <a href="resources.html">📚 资源库</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>❄️ 故障处理流程</h1>
+    <p>从报修到验收每一步谁干、谁签、多久完成 —— 不再扯皮</p>
+  </div>
+
+  <section class="box">
+    <h2>一、故障处理六步流程</h2>
+    <figure>
+      <svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="#16a34a"/>
+          </marker>
+        </defs>
+        <!-- 六个步骤盒子 -->
+        <g font-size="13" fill="#1f2937">
+          <rect x="20"  y="20"  width="180" height="52" rx="10" fill="#e8f5ee" stroke="#16a34a"/>
+          <text x="110" y="42" text-anchor="middle" font-weight="bold">① 报修受理</text>
+          <text x="110" y="61" text-anchor="middle" font-size="11.5" fill="#6b7280">电话/微信/巡检发现→登记</text>
+
+          <rect x="250" y="20"  width="180" height="52" rx="10" fill="#e8f5ee" stroke="#16a34a"/>
+          <text x="340" y="42" text-anchor="middle" font-weight="bold">② 现场确认分级</text>
+          <text x="340" y="61" text-anchor="middle" font-size="11.5" fill="#6b7280">一般 / 重要 / 紧急（影响供冷供暖?）</text>
+
+          <rect x="480" y="20"  width="180" height="52" rx="10" fill="#fdecea" stroke="#b42318"/>
+          <text x="570" y="42" text-anchor="middle" font-weight="bold" fill="#b42318">③ 紧急：先止损</text>
+          <text x="570" y="61" text-anchor="middle" font-size="11.5" fill="#b42318">切备用设备/局部停机→同步上报双方</text>
+
+          <rect x="480" y="120" width="180" height="52" rx="10" fill="#e8f5ee" stroke="#16a34a"/>
+          <text x="570" y="142" text-anchor="middle" font-weight="bold">④ 诊断与方案</text>
+          <text x="570" y="161" text-anchor="middle" font-size="11.5" fill="#6b7280">查原因→出处理方案→涉及费用先报甲方批</text>
+
+          <rect x="250" y="120" width="180" height="52" rx="10" fill="#e8f5ee" stroke="#16a34a"/>
+          <text x="340" y="142" text-anchor="middle" font-weight="bold">⑤ 维修实施</text>
+          <text x="340" y="161" text-anchor="middle" font-size="11.5" fill="#6b7280">断电挂牌→作业→完成后自检试运行</text>
+
+          <rect x="20"  y="120" width="180" height="52" rx="10" fill="#e8f5ee" stroke="#16a34a"/>
+          <text x="110" y="142" text-anchor="middle" font-weight="bold">⑥ 验收销单</text>
+          <text x="110" y="161" text-anchor="middle" font-size="11.5" fill="#6b7280">甲方/使用方验收→双方签字→归档</text>
+        </g>
+        <!-- 箭头 -->
+        <g stroke="#16a34a" stroke-width="2" fill="none" marker-end="url(#ar)">
+          <line x1="200" y1="46" x2="245" y2="46"/>
+          <line x1="430" y1="46" x2="475" y2="46"/>
+          <line x1="570" y1="72" x2="570" y2="115"/>
+          <line x1="475" y1="146" x2="435" y2="146"/>
+          <line x1="245" y1="146" x2="205" y2="146"/>
+        </g>
+        <!-- 时限说明 -->
+        <text x="340" y="215" text-anchor="middle" font-size="12.5" fill="#6b7280">时限参考：紧急故障 30 分钟内到场先止损 · 一般故障 2 小时内响应 · 24 小时内出处理意见</text>
+        <text x="340" y="240" text-anchor="middle" font-size="12.5" fill="#6b7280">重大故障（主机停机/水浸/电气火灾风险）立即电话上报双方负责人，书面报告 24 小时内补</text>
+        <text x="340" y="280" text-anchor="middle" font-size="12.5" fill="#8a5a00">※ 记录三联：报修登记 → 维修工单 → 验收单，三单编号一致，月度装订归档</text>
+      </svg>
+      <figcaption>图：故障处理流程（可打印张贴在值班室）</figcaption>
+    </figure>
+  </section>
+
+  <section class="box">
+    <h2>二、责任分工表（扯皮就照这张表对）</h2>
+    <table>
+      <tr><th style="width:18%">环节</th><th style="width:26%">责任方</th><th>职责与签字要求</th></tr>
+      <tr><td>报修受理</td><td>运维值班员</td><td>5 分钟内登记报修单（时间/位置/现象/报修人），同时通知当班负责人</td></tr>
+      <tr><td>分级确认</td><td>运维班组长</td><td>定级（一般/重要/紧急），紧急的立即启动止损并电话甲方联系人</td></tr>
+      <tr><td>现场处置</td><td>运维维修工</td><td>断电挂牌、安全措施、按规程作业；动火/高处等高危作业另办审批</td></tr>
+      <tr><td>方案与费用</td><td>运维项目负责人</td><td>超出日常维保范围（换件、大修）→ 书面报甲方审批后再干</td></tr>
+      <tr><td>验收</td><td>甲方使用部门</td><td>试运行正常后验收签字；不过关的退回重修，不得口头了结</td></tr>
+      <tr><td>归档</td><td>运维资料员</td><td>三单合一入履历表，台账同步更新</td></tr>
+    </table>
+  </section>
+
+  <section class="box">
+    <h2>三、常见故障速查（按"先简后繁"排查）</h2>
+    <table>
+      <tr><th style="width:20%">现象</th><th style="width:44%">按顺序查</th><th>易漏点</th></tr>
+      <tr><td>风机盘管不制冷</td><td>温控设定 → 风机转否 → 电动阀动作否 → 盘管滤网堵否 → 水温对否 → 支路阀门开否</td><td>凝水管憋气导致水绕行；Y 型过滤器堵</td></tr>
+      <tr><td>风机盘管滴水</td><td>滴水盘坡度/堵塞 → 保温破损结露 → 凝水管坡度倒坡</td><td>吊顶内隐蔽段凝水管接头</td></tr>
+      <tr><td>循环泵异响/压力波动</td><td>进口压力（气蚀?）→ Y 型过滤器 → 联轴器/轴承 → 电机电流</td><td>系统缺水定压失灵引发的假性故障</td></tr>
+      <tr><td>机组高压报警</td><td>冷却水温 → 冷却塔风机/填料 → 冷凝器趋近温度（脏堵）→ 冷媒过充</td><td>水处理失控导致的结垢是长期根因</td></tr>
+      <tr><td>机组低压报警</td><td>冷媒泄漏（检漏）→ 蒸发器水流量 → 过滤器堵塞 → 膨胀阀</td><td>先看水流量开关和 Y 型过滤器，别急着补冷媒</td></tr>
+      <tr><td>定压频繁补水</td><td>膨胀罐预充压力 → 补水阀卡位 → 系统漏点（阀门/盘管/隐蔽管道）</td><td>补得太勤不是"正常损耗"，是系统有漏</td></tr>
+    </table>
+    <div class="tip warn">⚠️ 安全铁律：任何检修<b>先断电、挂牌、验电</b>；水系统作业先关阀泄压；冷媒作业保证通风。省略安全步骤抢出来的时间，迟早加倍还回去。</div>
+  </section>
+
+  <footer>© 2026 老张的中央空调系统节能之家 · 流程为通用模板，时限与责任矩阵可按合同约定调整</footer>
+</div>
+</body>
+</html>

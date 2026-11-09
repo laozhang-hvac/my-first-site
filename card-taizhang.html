@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设备台账 · 模板与管理要求</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="logo">🧊 老张的中央空调系统节能之家</div>
+  <nav class="nav">
+    <a href="index.html">🏠 首页</a>
+    <a href="hvac-plan.html">📖 维保方案</a>
+    <a href="maglev.html">🌀 磁悬浮专篇</a>
+    <a href="zhidu.html">📋 制度上墙</a>
+    <a href="resources.html">📚 资源库</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>📋 设备台账</h1>
+    <p>一台一档：从进场到报废，设备的一生都在这张表里</p>
+    <p style="margin-top:6px"><button class="btn-print" onclick="window.print()">🖨️ 打印台账模板</button></p>
+  </div>
+
+  <section class="box">
+    <h2>一、为什么要建台账（不只是应付检查）</h2>
+    <ul>
+      <li><b>维保排计划的依据</b>：没有台账就说不清"哪台该保养了、上次洗滤网是什么时候"；</li>
+      <li><b>故障追根</b>：同一台盘管三年修四次，台账一翻就知道该换不该修；</li>
+      <li><b>结算与报价</b>：按台账数量出维保报价、结算工程量，不扯皮；</li>
+      <li><b>合规留痕</b>：GB 50365-2019 明确要求建立完整的设备台账及技术档案。</li>
+    </ul>
+  </section>
+
+  <section class="box">
+    <h2>二、设备台账主表（模板）</h2>
+    <p style="font-size:13px;color:#6b7280">项目/楼宇名称：＿＿＿＿＿＿ 系统分区：＿＿＿＿＿＿ 建档日期：＿＿＿＿＿＿</p>
+    <table>
+      <tr><th style="width:4%">序</th><th>设备编号</th><th>设备名称</th><th>型号规格</th><th>生产厂家</th><th>安装位置</th><th>投用日期</th><th>电功率 kW</th><th>备注</th></tr>
+      <tr><td>1</td><td>LS-01</td><td>磁悬浮离心机组</td><td> </td><td> </td><td>制冷机房</td><td> </td><td> </td><td> </td></tr>
+      <tr><td>2</td><td>LS-02</td><td>螺杆机组</td><td> </td><td> </td><td>制冷机房</td><td> </td><td> </td><td> </td></tr>
+      <tr><td>3</td><td>LB-01</td><td>冷冻水泵</td><td> </td><td> </td><td>制冷机房</td><td> </td><td> </td><td>一用一备</td></tr>
+      <tr><td>4</td><td>LQ-01</td><td>冷却水泵</td><td> </td><td> </td><td>制冷机房</td><td> </td><td> </td><td> </td></tr>
+      <tr><td>5</td><td>LT-01</td><td>冷却塔</td><td> </td><td> </td><td>屋面</td><td> </td><td> </td><td> </td></tr>
+      <tr><td>6</td><td>PG-001</td><td>风机盘管</td><td> </td><td> </td><td>＿层＿区</td><td> </td><td> </td><td>网络型/普通型</td></tr>
+      <tr><td>7</td><td>XH-01</td><td>新风机组/空调箱</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>8</td><td>DY-01</td><td>定压补水装置</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+    </table>
+    <div class="tip">💡 <b>编号规则建议</b>：系统-类型-序号，如 <code>LS</code>=冷水机组、<code>LB</code>=冷冻泵、<code>LQ</code>=冷却泵、<code>LT</code>=冷却塔、<code>PG</code>=盘管、<code>XH</code>=新风。楼层分区用两位数字（如 6F、17F）。编号要和现场挂牌一致，一一对应。</div>
+  </section>
+
+  <section class="box">
+    <h2>三、单台设备档案卡（一台一张，挂档案袋）</h2>
+    <table>
+      <tr><th style="width:24%">项目</th><th>内容</th></tr>
+      <tr><td>设备编号 / 名称</td><td> </td></tr>
+      <tr><td>型号规格 / 出厂编号</td><td> </td></tr>
+      <tr><td>生产厂家 / 联系电话</td><td> </td></tr>
+      <tr><td>主要技术参数</td><td>制冷量＿＿kW　功率＿＿kW　冷媒类型/充注量＿＿　电压＿＿</td></tr>
+      <tr><td>投用日期 / 质保期至</td><td> </td></tr>
+      <tr><td>随机资料清单</td><td>□说明书　□合格证　□竣工图　□调试报告　□保修卡</td></tr>
+      <tr><td>历次大修记录</td><td>日期＋内容＋承修单位＋验收人（不够另附页）</td></tr>
+      <tr><td>重大故障记录</td><td> </td></tr>
+      <tr><td>变更记录（移装/改造/报废）</td><td> </td></tr>
+    </table>
+  </section>
+
+  <section class="box">
+    <h2>四、维保履历表（跟主表配合用）</h2>
+    <table>
+      <tr><th>日期</th><th>设备编号</th><th>维保内容</th><th>耗材/配件</th><th>执行人</th><th>甲方签字</th></tr>
+      <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+    </table>
+    <div class="tip ok">✅ 管理三要求：<b>① 一变一记</b>——台账随设备变动实时更新，不许年底突击补；<b>② 纸电同步</b>——纸质台账机房留存，电子台账（Excel）每月备份一次；<b>③ 签字闭环</b>——每次维保甲方签字，履历表才算数。</div>
+  </section>
+
+  <footer>© 2026 老张的中央空调系统节能之家 · 台账模板可按本单位设备类型增删列</footer>
+</div>
+</body>
+</html>

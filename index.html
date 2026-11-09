@@ -4,7 +4,7 @@
   <!-- 告诉浏览器：这是中文网页，手机上也能正常显示 -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的第一个网页 — 编程学习第 1 天</title>
+ <title>老张的中央空调系统节能之家</title>
 
   <!-- CSS 样式都写在这里（皮肤：控制网页长什么样） -->
   <style>
@@ -87,41 +87,48 @@
   <!-- 导航栏 -->
   <header>
     <div class="logo">🧑‍💻 老张的中央空调系统节能之家</div>
-    <button id="darkBtn">🌙 暗黑模式</button>
+    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+      <a href="hvac-plan.html" style="border:1px solid var(--主色); color:var(--主色); padding:6px 14px; border-radius:8px; text-decoration:none; font-size:14px;" onmouseover="this.style.background='var(--主色)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--主色)'">📖 维保方案</a>
+      <a href="maglev.html" style="border:1px solid var(--主色); color:var(--主色); padding:6px 14px; border-radius:8px; text-decoration:none; font-size:14px;" onmouseover="this.style.background='var(--主色)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--主色)'">🌀 磁悬浮专篇</a>
+      <a href="zhidu.html" style="border:1px solid var(--主色); color:var(--主色); padding:6px 14px; border-radius:8px; text-decoration:none; font-size:14px;" onmouseover="this.style.background='var(--主色)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--主色)'">📋 制度上墙</a>
+      <a href="巡检记录本.html" style="border:1px solid var(--主色); color:var(--主色); padding:6px 14px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:bold;" onmouseover="this.style.background='var(--主色)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--主色)'">🔧 巡检记录本</a>
+      <a href="resources.html" style="border:1px solid var(--主色); color:var(--主色); padding:6px 14px; border-radius:8px; text-decoration:none; font-size:14px;" onmouseover="this.style.background='var(--主色)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--主色)'">📚 资源库</a>
+      <button id="darkBtn">🌙 暗黑模式</button>
+    </div>
   </header>
 
   <!-- 主标题 + 介绍 -->
   <section class="hero">
-    <h1>你好，这是我的第一个网页！</h1>
-    <p>用 AI 写代码 + 自己动手改，编程学习第 1 天的成果。</p>
+    <h1>老张的中央空调系统节能之家</h1>
+    <p>维保方案 · 磁悬浮机组保养 · 制度上墙 · 专业表格 —— 点卡片或右上角菜单进入。</p>
   </section>
 
-  <!-- 四张卡片：想改文字，直接改下面 <h3> 和 <p> 里的中文 -->
+  <!-- 四张卡片：点击卡片直接进入对应内容页 -->
   <section class="cards">
-    <div class="card">
+    <div class="card" style="cursor:pointer" onclick="location.href='card-jieneng.html'">
       <div class="icon">🌐</div>
       <h3>节能改造测算</h3>
-      <p>换泵、加变频、改管路，算清楚能省多少电费。</p>
+      <p>换泵、加变频、改管路，算清楚能省多少电费。<b style="color:var(--主色)">进入 →</b></p>
     </div>
-    <div class="card">
+    <div class="card" style="cursor:pointer" onclick="location.href='card-xunjian.html'">
       <div class="icon">🔧</div>
       <h3>空调维保巡检</h3>
-      <p>按机组编号记录巡检日期、压力、温度，异常自动标红。</p>
+      <p>按机组编号记录巡检日期、压力、温度，异常自动标红。<b style="color:var(--主色)">进入 →</b></p>
     </div>
-    <div class="card">
+    <div class="card" style="cursor:pointer" onclick="location.href='card-taizhang.html'">
       <div class="icon">📋</div>
       <h3>设备台账</h3>
-      <p>每台机组的型号、安装日期、维修记录，一页看清楚。</p>
+      <p>每台机组的型号、安装日期、维修记录，一页看清楚。<b style="color:var(--主色)">进入 →</b></p>
     </div>
-    <div class="card">
+    <div class="card" style="cursor:pointer" onclick="location.href='card-guzhang.html'">
       <div class="icon">❄️</div>
       <h3>故障处理流程</h3>
-      <p>从报修到验收的每一步，谁签字、谁负责，不再扯皮。</p>
+      <p>从报修到验收的每一步，谁签字、谁负责，不再扯皮。<b style="color:var(--主色)">进入 →</b></p>
     </div>
-  <div class="card">
+  <div class="card" style="cursor:pointer" onclick="location.href='maglev.html'">
       <div class="icon">⚡</div>
-      <h3>报价单生成</h3>
-      <p>按项目把机组型号、数量、单价拉出来，自动合计金额，直接出单。</p>
+      <h3>磁悬浮机组保养</h3>
+      <p>磁悬浮轴承原理、参数阈值、五条红线、分级保养全套。<b style="color:var(--主色)">进入 →</b></p>
     </div>
   </section>
 

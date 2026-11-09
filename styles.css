@@ -1,0 +1,82 @@
+/* 老张网站 共通样式（所有内容页引用） */
+:root {
+  --主色: #16a34a;
+  --背景色: #f5f7fa;
+  --卡片色: #ffffff;
+  --文字色: #1f2937;
+  --浅绿: #e8f5ee;
+  --边线: #d1e7db;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  background: var(--背景色);
+  color: var(--文字色);
+  line-height: 1.7;
+}
+header {
+  background: var(--卡片色);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+  padding: 14px 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  position: sticky; top: 0; z-index: 10;
+}
+header .logo { font-weight: bold; color: var(--主色); font-size: 17px; }
+header .nav { display: flex; gap: 8px; flex-wrap: wrap; }
+header .nav a {
+  border: 1px solid var(--主色); color: var(--主色);
+  padding: 5px 12px; border-radius: 8px; text-decoration: none; font-size: 13.5px;
+}
+header .nav a:hover { background: var(--主色); color: #fff; }
+header .nav a.on { background: var(--主色); color: #fff; }
+
+.wrap { max-width: 1000px; margin: 0 auto; padding: 24px 16px 60px; }
+.hero { text-align: center; padding: 30px 10px 6px; }
+.hero h1 { font-size: 26px; margin-bottom: 8px; }
+.hero p { color: #6b7280; font-size: 14px; }
+
+section.box {
+  background: var(--卡片色); border-radius: 14px; padding: 26px 28px; margin-top: 22px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+section.box h2 { color: var(--主色); font-size: 20px; border-bottom: 2px solid var(--主色); padding-bottom: 8px; margin-bottom: 14px; }
+section.box h3 { font-size: 16px; margin: 18px 0 8px; }
+section.box p, section.box li { font-size: 14.5px; }
+section.box ul, section.box ol { padding-left: 22px; margin: 6px 0; }
+section.box li { margin: 3px 0; }
+
+table { width: 100%; border-collapse: collapse; margin: 12px 0 6px; font-size: 13.5px; }
+th { background: var(--主色); color: #fff; padding: 8px 10px; text-align: left; font-weight: normal; }
+td { border: 1px solid var(--边线); padding: 8px 10px; vertical-align: top; }
+tr:nth-child(even) td { background: #f7faf8; }
+
+.tip {
+  background: #fff7e6; border: 1px solid #f0d9a6; border-radius: 10px;
+  padding: 10px 14px; font-size: 13.5px; color: #8a5a00; margin: 12px 0;
+}
+.warn { background: #fdecea; border-color: #f5c6c2; color: #b42318; }
+.ok { background: var(--浅绿); border-color: var(--边线); color: var(--主色); }
+
+figure { margin: 14px 0; text-align: center; }
+figure svg { max-width: 100%; height: auto; }
+figcaption { font-size: 12.5px; color: #9ca3af; margin-top: 6px; }
+
+.btn-print {
+  display: inline-block; background: var(--主色); color: #fff; border: none;
+  padding: 8px 18px; border-radius: 8px; cursor: pointer; font-size: 14px; margin: 6px 4px 0 0;
+}
+.btn-print:hover { opacity: .88; }
+
+footer { text-align: center; padding: 30px; font-size: 13px; color: #9ca3af; }
+
+@media print {
+  header, footer, .btn-print, .no-print { display: none !important; }
+  body { background: #fff; }
+  section.box { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+}
+@media (max-width: 640px) {
+  section.box { padding: 18px 14px; }
+  .hero h1 { font-size: 21px; }
+  table { font-size: 12.5px; }
+  th, td { padding: 6px; }
+}

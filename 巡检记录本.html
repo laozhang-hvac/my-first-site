@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>空调巡检记录本（可保存·可导出）</title>
+<style>
+  /* ===== 配色：和你的网站一套 ===== */
+  :root {
+    --主色: #16a34a;
+    --背景: #f5f7fa;
+    --卡片: #ffffff;
+    --文字: #1f2937;
+    --边线: #d1e7db;
+    --浅绿: #e8f5ee;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Microsoft YaHei",sans-serif; background:var(--背景); color:var(--文字); line-height:1.6; }
+  header { background:var(--卡片); padding:14px 20px; box-shadow:0 1px 4px rgba(0,0,0,.08); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+  header h1 { font-size:17px; color:var(--主色); }
+  header a { font-size:13.5px; color:var(--主色); text-decoration:none; border:1px solid var(--主色); padding:5px 12px; border-radius:8px; }
+  .wrap { max-width:1000px; margin:0 auto; padding:20px 14px 60px; }
+
+  .card { background:var(--卡片); border-radius:14px; padding:20px 22px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:18px; }
+  .card h2 { font-size:16px; color:var(--主色); margin-bottom:14px; padding-bottom:8px; border-bottom:2px solid var(--主色); }
+
+  /* ===== 表单：输入框的样子 ===== */
+  .form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+  .field label { display:block; font-size:13px; color:#6b7280; margin-bottom:4px; }
+  .field input, .field select, .field textarea {
+    width:100%; padding:8px 10px; border:1px solid var(--边线); border-radius:8px;
+    font-size:14px; font-family:inherit; background:#fff; color:var(--文字);
+  }
+  .field input:focus, .field textarea:focus { outline:2px solid var(--主色); outline-offset:-1px; }
+  .field.full { grid-column:1 / -1; }
+
+  .btn { border:none; border-radius:8px; padding:9px 20px; font-size:14px; cursor:pointer; font-family:inherit; }
+  .btn-main { background:var(--主色); color:#fff; }
+  .btn-main:hover { opacity:.88; }
+  .btn-ghost { background:transparent; color:var(--主色); border:1px solid var(--主色); }
+  .btn-ghost:hover { background:var(--浅绿); }
+  .btn-del { background:transparent; border:none; color:#b42318; cursor:pointer; font-size:13px; }
+  .actions { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+  table { width:100%; border-collapse:collapse; font-size:13.5px; }
+  th { background:var(--主色); color:#fff; padding:8px; text-align:left; font-weight:normal; white-space:nowrap; }
+  td { border:1px solid var(--边线); padding:7px 8px; }
+  tr:nth-child(even) td { background:#f7faf8; }
+  .empty { text-align:center; color:#9ca3af; font-size:13.5px; padding:20px 0; }
+  .count { font-size:13px; color:#6b7280; margin-top:10px; }
+  /* 分机型筛选按钮 */
+  .filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+  .fbtn { border:1px solid var(--边线); background:#fff; color:#374151; border-radius:16px; padding:5px 14px; font-size:13px; cursor:pointer; font-family:inherit; }
+  .fbtn.active { background:var(--主色); color:#fff; border-color:var(--主色); }
+  .tip { background:#fff7e6; border:1px solid #f0d9a6; border-radius:10px; padding:10px 14px; font-size:13px; color:#8a5a00; margin-top:12px; }
+
+  /* ===== 新增：备份 / 恢复 / 打印 按钮条 ===== */
+  .data-bar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:14px; padding-bottom:14px; border-bottom:1px dashed var(--边线); }
+  .data-bar .hint { font-size:12.5px; color:#9ca3af; }
+  .print-head { display:none; }   /* 只在打印时出现，屏幕上藏起来 */
+
+  /* ===== 新增：打印专用样式（Ctrl+P 预览就能看到效果）=====
+     思路：屏幕上好看的东西（导航、按钮、筛选）打印时全部藏起来，
+           只留标题 + 表格，并且改成横向A4，一张纸能放更多列 */
+  @media print {
+    header, .no-print, .filters, .actions, .tip, .btn-del, .data-bar { display:none !important; }
+    .form-card, .count { display:none !important; }   /* 填表区整块不上纸，只打表格 */
+    body { background:#fff; color:#000; }
+    .wrap { max-width:none; padding:0; }
+    .card { box-shadow:none; border-radius:0; padding:0; margin:0; }
+    .card h2 { display:none; }
+    .print-head { display:block; text-align:center; margin-bottom:10px; }
+    .print-head h3 { font-size:16px; margin-bottom:4px; }
+    .print-head p { font-size:11px; color:#555; }
+    table { font-size:10.5px; }
+    th { background:#e5e7eb !important; color:#000 !important; border:1px solid #666; padding:4px 5px; }
+    td { border:1px solid #666; padding:3px 5px; }
+    tr:nth-child(even) td { background:#fff; }
+    .empty { display:none; }
+    th:last-child, td:last-child { display:none; }   /* 最后一列是删除按钮，纸上不要 */
+    @page { size:A4 landscape; margin:10mm; }
+  }
+
+  @media (max-width:640px){ th,td{font-size:12px; padding:5px;} .card{padding:16px 14px;} }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔧 空调巡检记录本</h1>
+  <a href="index.html">← 返回首页</a>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== 第一块：填表区（打印时不显示，所以加了 form-card 类名）===== -->
+  <div class="card form-card">
+    <h2>① 填一条巡检记录</h2>
+    <div class="form-grid">
+      <div class="field">
+        <label>日期</label>
+        <input type="date" id="f-date">
+      </div>
+      <div class="field">
+        <label>机组编号</label>
+        <input type="text" id="f-unit" placeholder="如 LS-01">
+      </div>
+      <div class="field">
+        <label>机组类型</label>
+        <select id="f-type">
+          <option value="">— 请选择 —</option>
+          <option>冷水机组</option>
+          <option>水源热泵机组</option>
+          <option>风冷模块机组</option>
+          <option>多联机组</option>
+          <option>其他</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>品牌</label>
+        <input type="text" id="f-brand" placeholder="如 海尔 / 美的 / 约克">
+      </div>
+      <div class="field">
+        <label>型号</label>
+        <input type="text" id="f-model" placeholder="如 KFR-120W">
+      </div>
+      <div class="field">
+        <label>电压 V</label>
+        <input type="number" step="0.1" id="f-volt" placeholder="380">
+      </div>
+      <div class="field">
+        <label>电流 A</label>
+        <input type="number" step="0.1" id="f-amp" placeholder="12.5">
+      </div>
+      <div class="field">
+        <label>供水压力 MPa</label>
+        <input type="number" step="0.01" id="f-pin" placeholder="0.28">
+      </div>
+      <div class="field">
+        <label>回水压力 MPa</label>
+        <input type="number" step="0.01" id="f-pout" placeholder="0.46">
+      </div>
+      <div class="field">
+        <label>供水温度 ℃</label>
+        <input type="number" step="0.1" id="f-tin" placeholder="7.0">
+      </div>
+      <div class="field">
+        <label>回水温度 ℃</label>
+        <input type="number" step="0.1" id="f-tout" placeholder="12.0">
+      </div>
+  <div class="field">
+        <label>环境温度 ℃</label>
+        <input type="number" step="0.1" id="f-amb" placeholder="26.0">
+      </div>
+      <div class="field full">
+        <label>异常情况 / 处理措施（没有就留空）</label>
+        <textarea id="f-note" rows="2" placeholder="如：Y型过滤器压差偏大，已清洗滤网"></textarea>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-main" onclick="saveRecord()">💾 保存这条记录</button>
+      <button class="btn btn-ghost" onclick="exportCSV()">📤 导出为表格（Excel/WPS 可开）</button>
+      <span id="msg" style="font-size:13px;color:var(--主色)"></span>
+    </div>
+    <div class="tip">💡 保存后按 <b>F5 刷新</b>页面，记录还在——这就是今天要学的核心：数据存在你<b>这台电脑的浏览器</b>里，不联网也不会丢。</div>
+  </div>
+
+  <!-- ===== 第二块：记录列表 ===== -->
+  <div class="card">
+    <h2>② 已保存的记录（按机型分表看）</h2>
+
+    <!-- 新增：数据安全区。备份=存成文件带走；恢复=从文件读回来；打印=出纸质单 -->
+    <div class="data-bar no-print">
+      <button class="btn btn-ghost" onclick="backupJSON()">💾 备份全部数据</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('importFile').click()">📥 从备份恢复</button>
+      <button class="btn btn-ghost" onclick="window.print()">🖨️ 打印 / 存PDF</button>
+      <!-- 这个文件选择框被藏起来了，点上面的按钮才会弹出来 -->
+      <input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="importJSON(this)">
+      <span class="hint">备份文件存U盘或网盘，换电脑、清缓存都不怕</span>
+    </div>
+
+    <!-- 打印时才显示的表头（屏幕上看不到） -->
+    <div class="print-head">
+      <h3>空调系统巡检记录表</h3>
+      <p id="printInfo"></p>
+    </div>
+
+    <div class="filters">
+      <button class="fbtn active" onclick="setFilter('', this)">全部</button>
+      <button class="fbtn" onclick="setFilter('冷水机组', this)">冷水机组</button>
+      <button class="fbtn" onclick="setFilter('水源热泵机组', this)">水源热泵机组</button>
+      <button class="fbtn" onclick="setFilter('风冷模块机组', this)">风冷模块机组</button>
+      <button class="fbtn" onclick="setFilter('多联机组', this)">多联机组</button>
+      <button class="fbtn" onclick="setFilter('其他', this)">其他</button>
+    </div>
+    <div id="list"></div>
+    <div class="count" id="count"></div>
+    <!-- 回收站提示条：误删后点一下就能放回去 -->
+    <div id="undoBar" style="display:none; margin-top:10px; padding:10px 14px; background:#fff7e6; border:1px solid #f0d9a6; border-radius:10px; font-size:13.5px; color:#8a5a00;">
+      ↩ 刚删除了：<b id="undoInfo"></b>
+      <button onclick="undoDel()" style="margin-left:10px; background:#8a5a00; color:#fff; border:none; border-radius:6px; padding:5px 14px; cursor:pointer;">撤销删除，放回去</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   今天的三个新东西都在这一段里，逐段看注释就懂了
+   ① 输入框取值  ② 浏览器存储 localStorage  ③ 生成并下载文件
+   ============================================================ */
+
+// 存储用的"抽屉名字"。同一个名字，随时能取回同一个抽屉里的东西
+const KEY = 'hvac_inspections';
+
+// ---------- ③ 读抽屉：把存过的记录取出来（没有就返回空数组） ----------
+function loadRecords() {
+  const raw = localStorage.getItem(KEY);      // 取出来的是一段文字
+  return raw ? JSON.parse(raw) : [];          // JSON.parse：把文字还原成数组
+}
+
+// ---------- 存抽屉：把整个数组写回去 ----------
+function saveRecords(arr) {
+  localStorage.setItem(KEY, JSON.stringify(arr));  // JSON.stringify：数组转成文字才能存
+}
+
+// ---------- ① 取值 + 保存一条 ----------
+function saveRecord() {
+  // 逐个从输入框里把值读出来（.value 就是框里填的内容）
+  const rec = {
+    date:  document.getElementById('f-date').value,
+    unit:  document.getElementById('f-unit').value.trim(),
+    type:  document.getElementById('f-type').value,
+    brand: document.getElementById('f-brand').value.trim(),
+    model: document.getElementById('f-model').value.trim(),
+    volt:  document.getElementById('f-volt').value,
+    amp:   document.getElementById('f-amp').value,
+    pin:   document.getElementById('f-pin').value,
+    pout:  document.getElementById('f-pout').value,
+    tin:   document.getElementById('f-tin').value,
+    tout:  document.getElementById('f-tout').value,
+    note:  document.getElementById('f-note').value.trim(),
+amb:   document.getElementById('f-amb').value,
+    savedAt: new Date().toLocaleString('zh-CN')
+  };
+
+  // 必填校验：日期、机组编号、类型、供水压力没填就不让存
+  if (!rec.date || !rec.unit || !rec.type || !rec.pin) {
+    document.getElementById('msg').textContent = '⚠️ 日期、机组编号、机组类型、供水压力必填';
+    document.getElementById('msg').style.color = '#b42318';
+    return;
+  }
+
+  const arr = loadRecords();
+  arr.push(rec);          // 追加到数组末尾
+  saveRecords(arr);       // 整组存回抽屉
+  render();               // 重新画一遍列表
+  clearForm();
+
+  const m = document.getElementById('msg');
+  m.textContent = '✅ 已保存，共 ' + arr.length + ' 条';
+  m.style.color = 'var(--主色)';
+}
+
+// ---------- 清空表单（保存后方便接着填下一条） ----------
+function clearForm() {
+  ['f-unit','f-type','f-brand','f-model','f-volt','f-amp','f-pin','f-pout','f-tin','f-tout','f-amb','f-note'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+}
+
+// ---------- 把记录画到页面上 ----------
+let curFilter = '';   // 当前选的机型筛选，'' = 全部
+
+function setFilter(t, btn) {
+  curFilter = t;
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  render();
+}
+
+function render() {
+  const all = loadRecords();
+  const arr = curFilter ? all.filter(r => r.type === curFilter) : all;
+  const box = document.getElementById('list');
+
+  if (arr.length === 0) {
+    box.innerHTML = '<div class="empty">' + (curFilter ? '「' + curFilter + '」类型还没有记录' : '还没有记录，在上面填一条试试') + '</div>';
+  } else {
+    let html = '<div style="overflow-x:auto"><table><tr><th>日期</th><th>机组</th><th>类型</th><th>品牌</th><th>型号</th><th>电压V</th><th>电流A</th><th>供水压</th><th>回水压</th><th>供水温</th><th>回水温</th><th>环境温</th><th>异常/措施</th><th></th></tr>';
+    // 倒序显示：最新的在最上面
+    for (let i = arr.length - 1; i >= 0; i--) {
+      const idx = all.indexOf(arr[i]);   // 用它在总表里的真实位置，删除才不会删错行
+      const r = arr[i];
+      html += '<tr>'
+        + '<td>' + r.date + '</td>'
+        + '<td>' + r.unit + '</td>'
+        + '<td>' + (r.type || '-') + '</td>'
+        + '<td>' + (r.brand || '-') + '</td>'
+        + '<td>' + (r.model || '-') + '</td>'
+        + '<td>' + (r.volt || '-') + '</td>'
+        + '<td>' + (r.amp || '-') + '</td>'
+        + '<td>' + (r.pin || '-') + '</td>'
+        + '<td>' + (r.pout || '-') + '</td>'
+        + '<td>' + (r.tin || '-') + '</td>'
+        + '<td>' + (r.tout || '-') + '</td>'
+        + '<td>' + (r.amb || '-') + '</td>'
+        + '<td>' + (r.note || '-') + '</td>'
+        + '<td><button class="btn-del" onclick="delRecord(' + idx + ')">删除</button></td>'
+        + '</tr>';
+    }
+    html += '</table></div>';
+    box.innerHTML = html;
+  }
+  document.getElementById('count').textContent = '共 ' + arr.length + ' 条记录' + (curFilter ? '（机型：' + curFilter + '）' : '') + '（保存在本机浏览器中）';
+
+  // 打印页眉：条数 + 打印时间 + 当前筛选，方便纸质单子能追溯
+  document.getElementById('printInfo').textContent =
+    '共 ' + arr.length + ' 条' + (curFilter ? ' · 机型：' + curFilter : '') + ' · 打印时间 ' + new Date().toLocaleString('zh-CN');
+}
+
+// ---------- 删除一条（可撤销）----------
+const TRASH_KEY = 'hvac_trash';   // 小回收站：记住最近删的记录，最多10条
+
+function delRecord(index) {
+  if (!confirm('确定删除这一条？（删完下方会出现「撤销」按钮，随时能放回来）')) return;
+  const arr = loadRecords();
+  // 删除前先把它塞进回收站：记住内容和原来在第几行
+  const trash = JSON.parse(localStorage.getItem(TRASH_KEY) || '[]');
+  trash.unshift({ index: index, record: arr[index] });
+  if (trash.length > 10) trash.pop();   // 只留最近10条，防止越积越大
+  localStorage.setItem(TRASH_KEY, JSON.stringify(trash));
+
+  arr.splice(index, 1);     // 从第 index 个位置删掉 1 个
+  saveRecords(arr);
+  render();
+  showUndo();
+}
+
+// 显示/刷新撤销条
+function showUndo() {
+  const trash = JSON.parse(localStorage.getItem(TRASH_KEY) || '[]');
+  const bar = document.getElementById('undoBar');
+  if (trash.length === 0) { bar.style.display = 'none'; return; }
+  const t = trash[0].record;
+  document.getElementById('undoInfo').textContent =
+    (t.date || '') + ' ' + (t.unit || '') + (t.note ? '（' + t.note.slice(0, 12) + '）' : '');
+  bar.style.display = 'block';
+}
+
+// 撤销：把回收站里最近一条放回原位
+function undoDel() {
+  const trash = JSON.parse(localStorage.getItem(TRASH_KEY) || '[]');
+  if (!trash.length) return;
+  const { index, record } = trash.shift();          // 取出最近删的那条
+  localStorage.setItem(TRASH_KEY, JSON.stringify(trash));
+  const arr = loadRecords();
+  arr.splice(Math.min(index, arr.length), 0, record);  // 塞回原来的位置
+  saveRecords(arr);
+  render();
+  alert('已放回：' + (record.date || '') + ' ' + (record.unit || ''));
+}
+
+// ---------- ③ 导出 CSV：生成一个文件让浏览器下载 ----------
+function exportCSV() {
+  const all = loadRecords();
+  const arr = curFilter ? all.filter(r => r.type === curFilter) : all;
+  if (arr.length === 0) { alert(curFilter ? '「' + curFilter + '」还没有记录可导出' : '还没有记录可导出'); return; }
+
+  // 表头 + 每一行；字段里有逗号要用引号包起来，否则列会错位
+  const esc = s => '"' + String(s == null ? '' : s).replace(/"/g, '""') + '"';
+  let csv = ['日期','机组编号','机组类型','品牌','型号','电压V','电流A','供水压力MPa','回水压力MPa','供水温度℃','回水温度℃','环境温度℃','异常情况','保存时间'].map(esc).join(',') + '\n';
+  arr.forEach(r => {
+    csv += [r.date, r.unit, r.type, r.brand, r.model, r.volt, r.amp, r.pin, r.pout, r.tin, r.tout, r.amb, r.note, r.savedAt].map(esc).join(',') + '\n';
+  });
+
+  // 开头加一个特殊字符 \ufeff，Excel/WPS 才知道这是 UTF-8 中文，不然会乱码
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const today = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = '巡检记录_' + (curFilter ? curFilter + '_' : '') + today + '.csv';
+  a.click();                    // 模拟一次点击 → 触发下载
+  URL.revokeObjectURL(url);     // 用完释放，好习惯
+}
+
+/* ============================================================
+   【今天新增】数据备份与恢复
+   为什么需要：数据只存在浏览器的 localStorage 里，
+               一旦清理浏览器缓存 / 换电脑 / 换浏览器，记录就没了。
+   解决思路：把整个数组"另存为一个文件"（.json），想用时再读回来。
+
+   三个新概念，就这三个：
+   ① Blob —— 浏览器里凭空造一个文件
+   ② FileReader —— 浏览器读你选中的文件
+   ③ JSON —— 人和电脑都能看懂的数据格式，长这样：
+        { "记录条数": 2, "记录": [ {"unit":"LS-01"}, {"unit":"LS-02"} ] }
+   ============================================================ */
+
+// ---------- 备份：把全部记录存成一个 .json 文件 ----------
+function backupJSON() {
+  const all = loadRecords();
+  if (all.length === 0) { alert('还没有记录，先填一条再备份'); return; }
+
+  // 不直接存数组，外面多包一层"信封"：写上软件名、版本、时间、条数
+  // 好处是以后换别的程序、或者文件被别人打开，也能一眼看出这是什么
+  const 信封 = {
+    软件: '空调巡检记录本',
+    版本: 1,
+    备份时间: new Date().toLocaleString('zh-CN'),
+    记录条数: all.length,
+    记录: all
+  };
+
+  // JSON.stringify(数据, null, 2)：转成文字；null 占位，2 = 缩进2格（方便用记事本打开看）
+  const text = JSON.stringify(信封, null, 2);
+  const blob = new Blob([text], { type: 'application/json' });   // ① 造一个文件
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  const d = new Date();
+  const 日期 = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  a.href = url;
+  a.download = '巡检记录备份_' + 日期 + '.json';   // 文件名带日期，一天备几次不会互相覆盖
+  a.click();
+  URL.revokeObjectURL(url);
+
+  document.getElementById('msg').textContent = '✅ 已备份 ' + all.length + ' 条，文件在浏览器下载目录里';
+  document.getElementById('msg').style.color = 'var(--主色)';
+}
+
+// ---------- 恢复：选一个备份文件，把记录读回来 ----------
+function importJSON(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();          // ② 用 FileReader 读文件内容
+  reader.onload = function (e) {
+    let data;
+    try {
+      data = JSON.parse(e.target.result);   // 文字 → 数据；文件坏了这里会报错
+    } catch (err) {
+      alert('这个文件读不出来：可能选错了文件，或者文件内容被改坏了。');
+      input.value = '';
+      return;
+    }
+
+    // 兼容两种格式：新版备份（带信封，记录在 data.记录 里）、旧版（直接是数组）
+    const 导入 = Array.isArray(data) ? data : (data.记录 || []);
+    if (!Array.isArray(导入) || 导入.length === 0) {
+      alert('这个文件里没有找到巡检记录。');
+      input.value = '';
+      return;
+    }
+
+    const 现有 = loadRecords();
+    // confirm() 会弹出小窗口：确定=true，取消=false。用它来问"覆盖还是合并"
+    const 覆盖 = confirm('文件里有 ' + 导入.length + ' 条记录，本机现有 ' + 现有.length + ' 条。\n\n'
+      + '点【确定】= 用文件里的记录覆盖本机（本机原有的会被清掉）\n'
+      + '点【取消】= 追加合并（重复的自动跳过，不删本机原有）');
+
+    let 结果;
+    if (覆盖) {
+      结果 = 导入;
+    } else {
+      // 合并去重：同一天 + 同一机组 + 同一保存时间 视为同一条，跳过
+      结果 = 现有.slice();                       // slice() 复制一份，不动原数组
+      const 已存在 = new Set(现有.map(r => (r.date || '') + '|' + (r.unit || '') + '|' + (r.savedAt || '')));
+      导入.forEach(r => {
+        const 钥匙 = (r.date || '') + '|' + (r.unit || '') + '|' + (r.savedAt || '');
+        if (!已存在.has(钥匙)) { 已存在.add(钥匙); 结果.push(r); }
+      });
+    }
+
+    结果.sort((a, b) => String(a.date).localeCompare(String(b.date)));   // 按日期排好，表格才顺眼
+    saveRecords(结果);
+    render();
+
+    const m = document.getElementById('msg');
+    m.textContent = '✅ 恢复完成，现有 ' + 结果.length + ' 条';
+    m.style.color = 'var(--主色)';
+    input.value = '';    // 清空选择，方便马上再选一次
+  };
+  reader.readAsText(file, 'utf-8');            // 按 UTF-8 读，中文不乱码
+}
+
+// ---------- 页面打开时：日期默认今天，并画出已有记录 ----------
+document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
+render();
+showUndo();   // 打开页面时检查：回收站里有没有等着撤销的记录
+</script>
+</body>
+</html>

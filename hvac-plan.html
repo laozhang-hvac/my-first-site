@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中央空调系统运行维护保养方案（精简版）</title>
+  <style>
+    :root {
+      --主色: #16a34a;
+      --背景色: #f5f7fa;
+      --卡片色: #ffffff;
+      --文字色: #1f2937;
+      --浅绿: #e8f5ee;
+      --边线: #d1e7db;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      background: var(--背景色);
+      color: var(--文字色);
+      line-height: 1.7;
+    }
+    header {
+      background: var(--卡片色);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      position: sticky; top: 0; z-index: 10;
+    }
+    header .logo { font-weight: bold; color: var(--主色); font-size: 17px; }
+    header a.back {
+      border: 1px solid var(--主色); color: var(--主色);
+      padding: 6px 14px; border-radius: 8px; text-decoration: none; font-size: 14px;
+    }
+    header a.back:hover { background: var(--主色); color: #fff; }
+
+    .wrap { max-width: 960px; margin: 0 auto; padding: 24px 16px 60px; }
+    .hero { text-align: center; padding: 36px 10px 8px; }
+    .hero h1 { font-size: 26px; margin-bottom: 10px; }
+    .hero p { color: #6b7280; font-size: 14px; }
+    .hero .tag {
+      display: inline-block; margin-top: 10px; background: var(--浅绿);
+      color: var(--主色); border: 1px solid var(--边线);
+      padding: 3px 14px; border-radius: 999px; font-size: 13px;
+    }
+
+    nav.toc {
+      background: var(--卡片色); border: 1px solid var(--边线); border-radius: 12px;
+      padding: 14px 18px; margin: 20px 0 8px; font-size: 14px;
+    }
+    nav.toc b { color: var(--主色); }
+    nav.toc a { color: var(--文字色); text-decoration: none; margin-right: 14px; display: inline-block; padding: 2px 0; }
+    nav.toc a:hover { color: var(--主色); }
+
+    section { background: var(--卡片色); border-radius: 14px; padding: 26px 28px; margin-top: 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    section h2 { color: var(--主色); font-size: 20px; border-bottom: 2px solid var(--主色); padding-bottom: 8px; margin-bottom: 14px; }
+    section h3 { font-size: 16px; margin: 18px 0 8px; }
+    section p, section li { font-size: 14.5px; }
+    section ul, section ol { padding-left: 22px; margin: 6px 0; }
+    section li { margin: 3px 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 6px; font-size: 13.5px; }
+    th { background: var(--主色); color: #fff; padding: 8px 10px; text-align: left; font-weight: normal; }
+    td { border: 1px solid var(--边线); padding: 8px 10px; vertical-align: top; }
+    tr:nth-child(even) td { background: #f7faf8; }
+    .tip {
+      background: #fff7e6; border: 1px solid #f0d9a6; border-radius: 10px;
+      padding: 10px 14px; font-size: 13.5px; color: #8a5a00; margin: 12px 0;
+    }
+    .warn { background: #fdecea; border-color: #f5c6c2; color: #b42318; }
+
+    footer { text-align: center; padding: 30px; font-size: 13px; color: #9ca3af; }
+    @media (max-width: 640px) {
+      section { padding: 18px 14px; }
+      .hero h1 { font-size: 21px; }
+      table { font-size: 12.5px; }
+      th, td { padding: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">🧑‍💻 老张的中央空调系统节能之家</div>
+    <a class="back" href="maglev.html">🌀 磁悬浮专篇</a>
+    <a class="back" href="index.html">← 返回首页</a>
+  </header>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>中央空调系统运行维护保养方案</h1>
+      <p>机电设备及风 / 水 / 电系统 · 定期维保 · 记录体系（精简版）</p>
+      <span class="tag">适用：办公楼 / 商业综合体 / 展馆等中央空调系统</span>
+    </div>
+
+    <nav class="toc">
+      <b>目录：</b>
+      <a href="#s1">一 系统构成</a>
+      <a href="#s2">二 维保分级总表</a>
+      <a href="#s3">三 分设备步骤</a>
+      <a href="#s4">四 厂家维保界面</a>
+      <a href="#s5">五 记录体系</a>
+      <a href="#s6">六 应急响应</a>
+    </nav>
+
+    <!-- 一 -->
+    <section id="s1">
+      <h2>一、适用范围与系统构成</h2>
+      <p>本方案覆盖中央空调系统全部机电设备及其风、水、电关联系统，按五大块划分维护对象：</p>
+      <table>
+        <tr><th style="width:130px">系统块</th><th>主要设备</th></tr>
+        <tr><td>冷热源</td><td>离心式 / 磁悬浮 / 螺杆式冷水机组、风冷模块化冷热水机组、水源热泵机组</td></tr>
+        <tr><td>水系统</td><td>冷冻 / 冷却 / 供暖循环水泵、冷却塔、定压补水装置、膨胀水箱（罐）、过滤器、阀门管路</td></tr>
+        <tr><td>末端</td><td>风机盘管、空气处理机组、组合式空调机组、新风机组</td></tr>
+        <tr><td>风系统</td><td>送回风管、风口、防火阀、排风机</td></tr>
+        <tr><td>电气自控</td><td>配电柜、变频器、传感器、温控器、楼宇自控</td></tr>
+      </table>
+      <div class="tip">维保总原则：以运行安全为底线、以能耗经济为目标、以记录可溯为管理抓手；运行方做日常与常规保养，专业厂家做年度深度保养。</div>
+    </section>
+
+    <!-- 二 -->
+    <section id="s2">
+      <h2>二、维保分级与频次总表</h2>
+      <table>
+        <tr><th>级别</th><th>频次</th><th>主要内容</th><th>责任方</th></tr>
+        <tr><td>日常巡检</td><td>每班 / 每日</td><td>看（跑冒滴漏）、听（异响）、摸（温度振动）、记（运行参数），填写运行日志</td><td>运行值班</td></tr>
+        <tr><td>月度保养</td><td>每月</td><td>清洗过滤网、检查皮带张紧与润滑油位、核对仪表读数、调阅报警记录</td><td>运维方</td></tr>
+        <tr><td>季度保养</td><td>每季（供冷 / 供暖前必做）</td><td>风机盘管清洗消毒、水泵润滑与对中、水质化验、冷却塔填料检查、控制柜除尘</td><td>运维方</td></tr>
+        <tr><td>年度保养</td><td>每年停机检修期</td><td>冷冻油与油过滤器更换、传感器校验、电机绝缘摇测、减速机换油、大修评估</td><td>设备厂家（含必备检测报告）</td></tr>
+        <tr><td>应急维修</td><td>全年 24 小时</td><td>接通知后按时限到场（合同一般约定 2～3 小时），处置后填写维修记录单</td><td>运维方（重大故障联厂家）</td></tr>
+      </table>
+    </section>
+
+    <!-- 三 -->
+    <section id="s3">
+      <h2>三、分设备保养详细步骤</h2>
+
+      <h3>3.1 冷水机组（离心 / 磁悬浮 / 螺杆）</h3>
+      <ul>
+        <li><b>每班巡检记录</b>：蒸发 / 冷凝压力与温度、油温油位（磁悬浮无油系统则查轴承状态与控制柜）、排气温度、电流电压、振动与噪音、冷媒管路结露情况；</li>
+        <li><b>每月</b>：控制屏自检、报警历史调阅归档、机旁仪表与就地表计比对、机房清洁；</li>
+        <li><b>每季</b>：冷媒管路泄漏目测（油渍处重点查）、启动柜接线目测紧固；</li>
+        <li><b>年度（厂家执行）</b>：冷冻油及油过滤器更换并留油样分析、导叶执行器检查、压力 / 温度传感器校验、控制参数优化、大修评估报告。</li>
+      </ul>
+      <div class="tip">磁悬浮机组特有：无油路系统，省去换油，但控制柜除尘与变频散热风道清洁必须按季度做；轴承状态以厂家后台数据为准。</div>
+
+      <h3>3.2 循环水泵</h3>
+      <ul>
+        <li><b>每月</b>：盘车灵活、润滑油位、机械密封渗漏（滴速≤规定值）、压力表读数、异响与振动；</li>
+        <li><b>每季</b>：轴承加脂 / 换油、联轴器对中复查、地脚螺栓紧固；<b>备用泵每周切换运行一次</b>，防止锈死；</li>
+        <li><b>年度</b>：电机绝缘摇测、轴承磨损评估更换、叶轮与泵腔检查；</li>
+        <li><b>运行控制</b>：轴承温度 ≤ 环境温度 +35℃ 且最高 ≤80℃；流量扬程控制在标牌范围内；</li>
+        <li><b>冬季停用</b>：打开泵底放水螺塞放净积水，防止冻裂。</li>
+      </ul>
+
+      <h3>3.3 冷却塔</h3>
+      <ul>
+        <li><b>每月</b>：布水均匀性、填料完整性、风扇皮带张紧与对中、减速机油位；</li>
+        <li><b>每季</b>：填料冲洗（结垢藻类）、水质取样化验、排污与加药、电机温升检查；</li>
+        <li><b>年度</b>：减速机换油、电机绝缘摇测、塔体与钢构防腐检查、风机轴承保养；</li>
+        <li><b>水质管理</b>：控制浓缩倍数，定期排污＋加药，配合旁滤设备，防止生物黏泥与结垢。</li>
+      </ul>
+
+      <h3>3.4 水泵入口过滤器（多年实战经验）</h3>
+      <div class="tip warn">
+        泵前过滤器的作用是<b>拦截大颗粒、保护叶轮</b>，不是精细过滤：采用 3-5 目（约 4.0-6.7mm 孔径）不锈钢粗滤网即可，机组换热管孔径一般 ≥3mm，粗滤完全够用。滤网过细会与黏泥、纤维形成"架桥效应"，频繁堵塞反而影响制冷。新装或改造的过滤器要核对<b>目数</b>与<b>安装高度</b>（底部盲板距地 ≥500mm，满足 GB 50243 检修空间要求），并建立清理台账（日期＋堵塞物形态＋耗时）。
+      </div>
+
+      <h3>3.5 风机盘管（每季 / 供冷供暖前）</h3>
+      <ul>
+        <li>过滤网清洗（清水或中性清洗剂）；</li>
+        <li>铝翅片用盘管清洗剂喷洗，清水漂净；</li>
+        <li>叶轮除尘、电机听音；</li>
+        <li>凝水盘清理消毒、冷凝水管疏通（防滴水损顶）；</li>
+        <li>温控器与三速开关功能测试、电动阀动作检查。</li>
+      </ul>
+
+      <h3>3.6 空气处理 / 组合式空调机组</h3>
+      <ul>
+        <li><b>每月</b>：皮带张紧与磨损、轴承润滑、过滤段压差（超限即换滤料）；</li>
+        <li><b>每季</b>：表冷器翅片清洗、凝水盘与水封检查、风阀执行器动作；</li>
+        <li><b>年度</b>：电机轴承保养、绝缘摇测、箱体密封与保温修复。</li>
+      </ul>
+
+      <h3>3.7 水系统与定压补水</h3>
+      <ul>
+        <li>定压补水装置每月检查：压力设定值、补水泵启停是否正常、安全阀/泄压阀动作值；</li>
+        <li>膨胀水箱每季清洗；冬夏阀门季节切换时逐台核对开关状态并挂牌；</li>
+        <li>系统补水量异常增大 = 有隐漏点，立即排查；首次充水必须充分排气；</li>
+        <li>科学稳压 = 定压点正确 + 囊式膨胀罐（吸纳膨胀水量）+ 高区膨胀水箱（或稳压罐）三者配套，缺一不可。</li>
+      </ul>
+
+      <h3>3.8 电气与自控</h3>
+      <ul>
+        <li><b>每月</b>：配电柜巡视（仪表、指示灯、异味）、温控器抽检；</li>
+        <li><b>每季</b>：控制柜停电除尘、接线端子紧固、变频器散热风道清洁；</li>
+        <li><b>年度</b>：绝缘摇测、保护定值校验、变频器参数备份（更换设备后须重新匹配调试并留书面记录）。</li>
+      </ul>
+    </section>
+
+    <!-- 四 -->
+    <section id="s4">
+      <h2>四、厂家定期维保界面划分</h2>
+      <table>
+        <tr><th>工作内容</th><th>运行方自做</th><th>厂家年度</th><th>第三方</th></tr>
+        <tr><td>日常巡检、运行日志</td><td>✔</td><td></td><td></td></tr>
+        <tr><td>过滤网 / 翅片 / 凝水盘清洗</td><td>✔</td><td></td><td></td></tr>
+        <tr><td>水泵润滑、盘车、切换</td><td>✔</td><td></td><td></td></tr>
+        <tr><td>水质日常管理、加药排污</td><td>✔</td><td></td><td>水质化验可委托</td></tr>
+        <tr><td>冷冻油 / 油过滤器更换、油样分析</td><td></td><td>✔</td><td></td></tr>
+        <tr><td>传感器校验、控制参数优化</td><td></td><td>✔</td><td></td></tr>
+        <tr><td>制冷剂补充、大修、部件更换</td><td></td><td>✔</td><td></td></tr>
+        <tr><td>电气预防性试验（绝缘 / 保护）</td><td>配合</td><td>部分</td><td>✔（持证电工 / 检测机构）</td></tr>
+        <tr><td>调试记录会签</td><td>参与</td><td>参与</td><td>—</td></tr>
+      </table>
+      <p>原则：<b>运行方日常保、厂家年度修、重大问题联合作业</b>；凡涉及压力容器、制冷剂充注、带电作业的，必须由持证专业人员实施。</p>
+    </section>
+
+    <!-- 五 -->
+    <section id="s5">
+      <h2>五、记录体系（文字 + 电子）</h2>
+      <h3>5.1 文字记录四件套</h3>
+      <table>
+        <tr><th>记录</th><th>填写时机</th><th>要求</th></tr>
+        <tr><td>运行日志</td><td>每班</td><td>运行参数、异常情况、交接事项，值班员签字</td></tr>
+        <tr><td>维保工作单</td><td>每次保养当场</td><td>内容＋耗材＋工时，双方签字，各存一份</td></tr>
+        <tr><td>维修记录单</td><td>每次故障处置后</td><td>故障现象、原因、处置、更换件、验证结果</td></tr>
+        <tr><td>月度维保报告</td><td>每月固定日</td><td>当月保养完成率、故障统计、下月计划、风险提示</td></tr>
+      </table>
+      <h3>5.2 电子记录</h3>
+      <ul>
+        <li><b>照片存档</b>：每次保养现场照片按"月份＋设备位号"命名归档；</li>
+        <li><b>电子台账</b>：设备台账（型号 / 位号 / 投运日期）、故障台账、耗材更换台账、水质化验记录，Excel 建表；</li>
+        <li><b>扫描归档</b>：签字版工作单扫描存电子档；</li>
+        <li><b>归档规则</b>：月度装订、年度成册；合同解除或终止时全部技术档案移交甲方。</li>
+      </ul>
+    </section>
+
+    <!-- 六 -->
+    <section id="s6">
+      <h2>六、应急响应与常见故障速查</h2>
+      <p>维保期间提供 24 小时应急服务，接通知后按合同时限（一般 2～3 小时）到场处理，直至恢复运行。</p>
+      <table>
+        <tr><th>故障现象</th><th>常见原因</th><th>第一时间动作</th></tr>
+        <tr><td>主机高压报警</td><td>冷凝器脏堵、冷却水量不足、冷却塔风扇故障</td><td>查冷却水泵与塔风扇运行，清洗冷凝器</td></tr>
+        <tr><td>冷冻水断流</td><td>泵入口过滤器堵塞、系统缺水、阀门误关</td><td>切备用泵、核对阀门状态、检查定压补水</td></tr>
+        <tr><td>水泵过载跳闸</td><td>叶轮卡阻、轴承损坏、电机受潮</td><td>切备用泵，盘车检查，绝缘摇测</td></tr>
+        <tr><td>冷却塔水温偏高</td><td>填料堵塞老化、布水不均、风量不足</td><td>检查布水与填料、风扇皮带，加排污</td></tr>
+        <tr><td>盘管漏水 / 滴水</td><td>凝水盘堵塞、冷凝水管坡度不足、接口渗漏</td><td>疏通凝水管、临时接水盘、安排停水检修</td></tr>
+      </table>
+    </section>
+  </div>
+
+  <footer>© 2026 老张的中央空调系统节能之家 · 本页为精简展示版，执行版以 Word 文档为准</footer>
+</body>
+</html>

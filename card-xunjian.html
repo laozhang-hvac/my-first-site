@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>空调维保巡检 · 记录表格模板</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="logo">🧊 老张的中央空调系统节能之家</div>
+  <nav class="nav">
+    <a href="index.html">🏠 首页</a>
+    <a href="hvac-plan.html">📖 维保方案</a>
+    <a href="maglev.html">🌀 磁悬浮专篇</a>
+    <a href="zhidu.html">📋 制度上墙</a>
+    <a href="resources.html">📚 资源库</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>🔧 空调维保巡检</h1>
+    <p>巡检参数怎么抄、抄到多少算正常、记录表怎么填 —— 直接打印就能用</p>
+    <p style="margin-top:6px"><button class="btn-print" onclick="window.print()">🖨️ 打印巡检表</button></p>
+  </div>
+
+  <section class="box">
+    <h2>一、巡检路线与频次</h2>
+    <table>
+      <tr><th style="width:18%">区域</th><th style="width:20%">频次</th><th>要点</th></tr>
+      <tr><td>制冷机房</td><td>每 2 小时一次</td><td>机组运行参数抄表（GB 50365-2019 要求重要设备参数每 2h 记录一次）、水泵、配电柜</td></tr>
+      <tr><td>冷却塔 / 屋面</td><td>每班一次</td><td>风机电流振动、布水均匀性、水位、皮带/减速机（有则查）</td></tr>
+      <tr><td>楼层末端（风机盘管/空调箱）</td><td>每周抽查 + 按报修</td><td>滴水盘、凝水管、过滤网、温控器</td></tr>
+      <tr><td>定压补水装置 / 膨胀水箱</td><td>每天一次</td><td>压力表读数、水位、自动补水是否动作</td></tr>
+    </table>
+    <div class="tip ok">✅ 口诀：<b>一巡二看三听四摸五记录</b>——巡路线；看仪表和跑冒滴漏；听异响；摸电机泵体温升（不烫手为限，注意安全）；记录不许事后补。</div>
+  </section>
+
+  <section class="box">
+    <h2>二、机房巡检参数参考值（抄表对照用）</h2>
+    <table>
+      <tr><th style="width:30%">参数</th><th style="width:32%">正常范围（参考）</th><th>异常处置</th></tr>
+      <tr><td>冷冻水供/回水温度</td><td>7℃ / 12℃（±1℃）</td><td>温差过小→查旁通阀、末端负荷；过大→查水泵流量</td></tr>
+      <tr><td>冷却水供/回水温度</td><td>32℃ / 37℃（±2℃）</td><td>供水过高→查冷却塔风机、填料、布水</td></tr>
+      <tr><td>循环泵进口压力</td><td>0.25～0.30 MPa</td><td>偏低→查 Y 型过滤器是否堵、定压是否正常</td></tr>
+      <tr><td>循环泵出口压力</td><td>0.45～0.50 MPa</td><td>结合铭牌扬程判断，偏差大先查阀门开度</td></tr>
+      <tr><td>定压点压力</td><td>0.25 MPa 左右（按系统高度核定）</td><td>波动大→查膨胀罐预充压力、补水阀</td></tr>
+      <tr><td>电机温升 / 轴承</td><td>外壳＜75℃，无异响</td><td>烫手或异响→测电流，安排轴承润滑/更换</td></tr>
+      <tr><td>机组油位/油色（有油机组）</td><td>视镜 1/2～2/3，油色清亮</td><td>发黑乳化→取样化验，安排换油</td></tr>
+    </table>
+    <div class="tip">💡 表中数值是通用参考，<b>以本单位系统设计值和厂家手册为准</b>——建议把本站参数抄成你们机房自己的"红线值"贴在配电柜上。</div>
+  </section>
+
+  <section class="box">
+    <h2>三、巡检记录表（打印版模板）</h2>
+    <p style="font-size:13px;color:#6b7280">机房名称：＿＿＿＿＿＿ 日期：＿＿＿＿年＿＿月＿＿日 天气：＿＿℃ 巡检人：＿＿＿＿</p>
+    <table>
+      <tr><th>设备/参数</th><th style="width:12%">08:00</th><th style="width:12%">10:00</th><th style="width:12%">12:00</th><th style="width:12%">14:00</th><th style="width:12%">16:00</th><th style="width:14%">异常记录</th></tr>
+      <tr><td>1#机组 冷冻水供温 ℃</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>1#机组 冷冻水回温 ℃</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>1#机组 冷却水供温 ℃</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>1#机组 运行电流 A</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>2#机组 冷冻水供温 ℃</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>2#机组 运行电流 A</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>1#冷冻泵 进/出口压力 MPa</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>2#冷冻泵 进/出口压力 MPa</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>1#冷却泵 进/出口压力 MPa</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>定压点压力 MPa / 水箱水位</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>冷却塔风机电流 A / 运行台数</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>机 房 温 度 / 湿 度</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+      <tr><td>跑冒滴漏 / 异响 / 异味检查</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td></tr>
+    </table>
+    <p style="margin-top:10px;font-size:13.5px">当班发现的问题及处理：＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</p>
+    <p style="font-size:13.5px">交接班备注：＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ 巡检人签字：＿＿＿＿ 主管复核：＿＿＿＿</p>
+    <div class="tip ok">✅ 填表规矩：<b>实抄实记、异常必写、签字留痕</b>。记录按 GB 50365-2019 保存不少于 2 年——既是管理要求，出了纠纷它就是你的证据。</div>
+  </section>
+
+  <footer>© 2026 老张的中央空调系统节能之家 · 巡检表为通用模板，可按本单位设备增改行</footer>
+</div>
+</body>
+</html>
